@@ -1,6 +1,6 @@
 <template>
   <div class="Forget">
-   Forget
+    Forget
   </div>
 </template>
 
