@@ -8,21 +8,27 @@
       v-if="show"
       @touchmove.prevent
     ></div> -->
-    <div
-      class="v-pop"
-      v-show="show"
-      key="2"
-      :style="{ width: width ? width : '' }"
-    >
+    <div v-show="show"
+         key="2"
+         class="v-pop"
+         :style="{ width: width ? width : '' }">
       <!-- <img :src="imgUrl" :alt="imgLoadTip" /> -->
       <h2>{{ title }}</h2>
-      <p v-html="content" class="content"></p>
+      <p class="content"
+         v-html="content"></p>
       <div class="footer-button">
-        <el-button size="mini" @click="show = false">取消</el-button>
-        <el-button size="mini" type="primary">确认</el-button>
+        <el-button size="mini"
+                   @click="show = false">
+          取消
+        </el-button>
+        <el-button size="mini"
+                   type="primary">
+          确认
+        </el-button>
       </div>
       <!-- <button @click="btnClick">{{ btnText }}</button> -->
-      <span class="close-button" @click="show = false">x</span>
+      <span class="close-button"
+            @click="show = false">x</span>
       <!-- <img @click="show = false" class="close" src="" alt="" /> -->
     </div>
   </transition-group>
@@ -37,7 +43,7 @@ export default {
       title: "",
       content: "",
       btnText: "",
-      width: ""
+      width: "",
     };
   },
   created() {},
@@ -45,11 +51,11 @@ export default {
     btnClick() {
       this.click();
       this.show = false;
-    }
-  }
+    },
+  },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 // 渐变过渡
 .fade-enter,
 .fade-leave-active {

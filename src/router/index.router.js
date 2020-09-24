@@ -1,33 +1,47 @@
-export default [
+/* Layout */
+import Layout from "@/layout";
+
+const constantRoutes = [{
+    path: "/redirect",
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: "/redirect/:path(.*)",
+      component: () =>
+        import( /* webpackChunkName: "redirect" */ "@/views/redirect"),
+    }],
+  },
   {
     path: "/",
-    name: "Home",
-    component: () => import(/* webpackChunkName: "home" */ "@/views/Home.vue")
+    component: Layout,
+    redirect: "/home",
+    children: [{
+      path: "home",
+      component: () =>
+        import( /* webpackChunkName: "home" */ "@/views/Home.vue"),
+      name: "Home",
+      meta: {
+        title: "总览",
+        icon: "home",
+        needLogin: true
+      }
+    }],
   },
   {
-    path: "/lan",
-    name: "Lan",
-    component: () => import(/* webpackChunkName: "lan" */ "@/views/Rong.vue")
-  },
-  {
-    path: "/detail",
-    name: "Detail",
-    component: () =>
-      import(/* webpackChunkName: "detail" */ "@/views/Detail.vue")
-  },
-  {
-    path: "/test",
-    name: "Test",
-    component: () => import(/* webpackChunkName: "test" */ "@/views/Test.vue")
-  },
-  {
-    path: "/form",
-    name: "Form",
-    component: () => import(/* webpackChunkName: "test" */ "@/views/Form.vue")
-  },
-  {
-    path: "*",
-    name: "404",
-    component: () => import(/* webpackChunkName: "404" */ "@/views/404.vue")
+    path: "/home",
+    component: Layout,
+    nav: true,
+    children: [{
+      path: "index",
+      component: () =>
+        import( /* webpackChunkName: "home" */ "@/views/Home.vue"),
+      name: "Home",
+      meta: {
+        title: "所有功能",
+        icon: "allFun",
+        needLogin: true
+      }
+    }],
   }
 ];
+export default constantRoutes;
