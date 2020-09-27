@@ -46,6 +46,7 @@ const Group = {
   },
   watch: {
     values(value) {
+      console.log("this.colors:", this.colors);
       this.$emit("change", value, this.colors);
     },
   },
@@ -149,7 +150,7 @@ export default {
   cursor: pointer;
   margin-right: 8px;
   text-align: center;
-  // color: @base-bg-color;
+  color: @base-bg-color;
   font-weight: bold;
 }
 </style>

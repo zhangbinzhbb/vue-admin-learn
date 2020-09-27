@@ -2,11 +2,13 @@
 const path = require("path");
 
 // 实现web项目 全局修改主题颜色
-const ThemeColorReplacer = require('webpack-theme-color-replacer');
+const themeColorReplacer = require('webpack-theme-color-replacer');
+
 const {
   getThemeColors,
   modifyVars
 } = require('./src/utils/themeUtil');
+
 const {
   resolveCss
 } = require('./src/utils/theme-color-replacer-extend');
@@ -58,8 +60,8 @@ module.exports = {
       //这个是加上自己的路径，
       //注意：试过不能使用别名路径
       patterns: [
-        path.resolve(__dirname, './src/styles/variables.less'),
-        path.resolve(__dirname, './src/theme/theme.less')
+        path.resolve(__dirname, './src/theme/theme.less'),
+        path.resolve(__dirname, './src/styles/variables.less')
       ]
     },
   },
@@ -79,7 +81,8 @@ module.exports = {
   configureWebpack: config => {
     config.entry.app = ["babel-polyfill", "whatwg-fetch", "./src/main.js"];
     config.plugins.push(
-      new ThemeColorReplacer({
+      // 生成仅包含颜色的替换样式（主题色等）
+      new themeColorReplacer({
         fileName: 'css/theme-colors-[contenthash:8].css',
         matchColors: getThemeColors(),
         injectCss: true,

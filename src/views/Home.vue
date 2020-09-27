@@ -2,21 +2,11 @@
   <div class="home">
     <a-row type="flex" justify="start">
       <a-col :span="24">
-        <a-button type="primary">
-          Primary
-        </a-button>
-        <a-button>Default</a-button>
-        <a-button type="dashed">
-          Dashed
-        </a-button>
-        <a-button type="danger">
+                <a-button type="danger">
           Danger
         </a-button>
         <a-button type="primary">
-          按钮
-        </a-button>
-        <a-button type="link">
-          Link
+          primary
         </a-button>
       </a-col>
     </a-row>
@@ -44,8 +34,7 @@
       style="margin-top:10px;"
       :columns="columns"
       :data-source="data"
-      :scroll="{ x: 1500, y: 300 }"
-    >
+      :scroll="{ x: 1500, y: 300 }">
       <a slot="action" slot-scope="text">action</a>
     </a-table>
 

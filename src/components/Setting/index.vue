@@ -1,13 +1,13 @@
 <template>
   <div class="side-setting">
     <SettingItem title="主题色">
-      <ColorCheckboxGroup :multiple="false">
+      <ColorCheckboxGroup :multiple="false"
+                          :default-values="[palettes.indexOf(theme.color)]"
+                          @change="(values, colors) => setTheme({...theme, color: colors[0]})">
         <ColorCheckbox v-for="(color, index) in palettes"
                        :key="index"
                        :color="color"
-                       :default-values="[palettes.indexOf(theme.color)]"
-                       :value="index"
-                       @change="(values, colors) => setTheme({...theme, color: ''})" />
+                       :value="index" />
       </ColorCheckboxGroup>
     </SettingItem>
   </div>
@@ -27,22 +27,20 @@ export default {
     ColorCheckbox,
   },
   data() {
-    return {
-      theme: {
-        color: "#13c2c2",
-        mode: "dark",
-        success: "#52c41a",
-        warning: "#faad14",
-        error: "#f5222d",
-      },
-    };
+    return {};
   },
   computed: {
-    ...mapState("setting", ["palettes"]),
+    ...mapState("setting", ["palettes", "theme"]),
   },
   methods: {
     ...mapMutations("setting", ["setTheme"]),
   },
 };
 </script>
+
+<style lang="less" scoped>
+.side-setting {
+  background-color: @base-bg-color;
+}
+</style>
 

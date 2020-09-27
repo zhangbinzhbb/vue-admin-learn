@@ -77,7 +77,7 @@ const ANTD = {
       'menu-dark-color': 'rgba(254, 254, 254, 0.65)',
       'menu-dark-highlight-color': '#fefefe',
       'menu-dark-arrow-color': '#fefefe',
-      'btn-primary-color': '#141414',
+      'btn-primary-color': '#fff',
     }
   }
 };

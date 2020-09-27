@@ -6,8 +6,8 @@
                class="sidebar-container"
                @dialog-show="maskShow = true" />
 
-      <AppMain @mouseenter.native="mouseenterEvent"
-               :class="maskShow?'sider-class-active':''" />
+      <AppMain :class="maskShow?'sider-class-active':''"
+               @mouseenter.native="mouseenterEvent" />
     </div>
     <div class="drawer-section"
          :class="visible?'drawer-section-open':''"
@@ -71,6 +71,7 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/styles/mixin/index.less";
+
 .app-wrapper {
   .clearfix;
   position: relative;
@@ -87,14 +88,15 @@ export default {
   top: 34%;
   position: fixed;
   z-index: 100;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fa541c;
-  border-radius: 4px 0 0 4px;
-  color: #fff;
+  background: @primary-color;
+  color: @base-bg-color;
+  border-radius: 5px 0 0 5px;
+  box-shadow: -2px 0 8px @shadow-color;
   cursor: pointer;
   i {
     font-size: 26px;

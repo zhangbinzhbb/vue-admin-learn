@@ -6,9 +6,9 @@
  */
 import axios from "axios";
 
-// import {
-//   Message
-// } from "ant-design-vue";
+import {
+  Message
+} from "ant-design-vue";
 
 import {
   BASE_URL,
@@ -65,10 +65,10 @@ service.interceptors.response.use(
     if (res.code !== 20000) {
       console.log('res:', res);
 
-      // Message.error(
-      //   res.message || "Error",
-      //   5,
-      // );
+      Message.error(
+        res.message || "Error",
+        5,
+      );
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -93,10 +93,10 @@ service.interceptors.response.use(
   },
   error => {
     console.log("err" + error); // for debug
-    // Message.error(
-    //   error.message,
-    //   5,
-    // );
+    Message.error(
+      error.message,
+      5,
+    );
     return Promise.reject(error);
   }
 );

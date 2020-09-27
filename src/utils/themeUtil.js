@@ -4,7 +4,7 @@ const {
 } = require('../config');
 
 const {
-  getMenuColors,
+  // getMenuColors,
   getAntdColors,
   getThemeToggleColors,
   getFunctionalColors
@@ -14,14 +14,18 @@ const {
   ANTD
 } = require('../config/default');
 
+// 获取主题色/mode
+// 从config/config.js 全局中获取到
 function getThemeColors(color, $theme) {
   const _color = color || theme.color;
   const mode = $theme || theme.mode;
   const replaceColors = getThemeToggleColors(_color, mode);
+
+  console.log('replaceColors:', replaceColors);
   const themeColors = [
     ...replaceColors.mainColors,
     ...replaceColors.subColors,
-    ...replaceColors.menuColors,
+    // ...replaceColors.menuColors,
     ...replaceColors.contentColors,
     ...replaceColors.rgbColors,
     ...replaceColors.functionalColors.success,
@@ -31,6 +35,7 @@ function getThemeColors(color, $theme) {
   return themeColors;
 }
 
+//
 function changeThemeColor(newColor, $theme) {
   let promise = client.changer.changeColor({
     newColors: getThemeColors(newColor, $theme)
@@ -41,13 +46,17 @@ function changeThemeColor(newColor, $theme) {
 function modifyVars(color) {
   let _color = color || theme.color;
   const palettes = getAntdColors(_color, theme.mode);
-  const menuColors = getMenuColors(_color, theme.mode);
+  // const menuColors = getMenuColors(_color, theme.mode);
   const {
     success,
     warning,
     error
   } = getFunctionalColors(theme.mode);
+  //const primary = '#d90007';
+
   const primary = palettes[5];
+
+  console.log('primary--1:', primary)
   return {
     'primary-color': primary,
     'primary-1': palettes[0],
@@ -73,9 +82,9 @@ function modifyVars(color) {
     'alert-error-bg-color': error[0],
     'alert-error-border-color': error[2],
     'processing-color': primary,
-    'menu-dark-submenu-bg': menuColors[0],
-    'layout-header-background': menuColors[1],
-    'layout-trigger-background': menuColors[2],
+    // 'menu-dark-submenu-bg': menuColors[0],
+    // 'layout-header-background': menuColors[1],
+    // 'layout-trigger-background': menuColors[2],
     'btn-danger-bg': error[4],
     'btn-danger-border': error[4],
     ...ANTD.theme[theme.mode]

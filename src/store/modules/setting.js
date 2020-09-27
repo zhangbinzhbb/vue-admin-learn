@@ -1,3 +1,4 @@
+import config from '@/config';
 import {
   ADMIN
 } from '@/config/default';
@@ -11,19 +12,21 @@ export default {
   namespaced: true,
   state: {
     palettes: ADMIN.palettes,
+    ...config,
     ...localSetting
   },
   getters: {},
   mutations: {
     setTheme(state, theme) {
-      const theme1 = {
-        color: "#1890ff",
-        mode: "dark",
-        success: "#52c41a",
-        warning: "#faad14",
-        error: "#f5222d"
-      };
-      state.theme = theme1;
+      // const theme1 = {
+      //   color: "#1890ff",
+      //   mode: "dark",
+      //   success: "#52c41a",
+      //   warning: "#faad14",
+      //   error: "#f5222d"
+      // };
+      console.log('theme:', theme);
+      state.theme = theme;
     },
   }
 };
