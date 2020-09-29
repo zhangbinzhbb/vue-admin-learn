@@ -11,7 +11,7 @@
               <item v-if="subItem.meta" :icon="subItem.meta && subItem.meta.icon" />
             </div>
             <span class="yu-name" @click="toRouterPath(item)">{{ subItem.meta.title }}</span>
-            <a-icon v-if="subItem.meta.permission" type="close" class="yu-close" />
+            <a-icon v-if="subItem.meta.permission" type="close" class="yu-close" @click="delMenuItem(subItem.meta.permission)" />
           </div>
           <div v-if="item.path !== '/'">
             <img v-if="!item.nav" class="l-drop-img" src="@/assets/images/menu.png" />
@@ -41,9 +41,7 @@
 <script>
 import Item from "./Item";
 import DialogMenu from "./DialogMenu";
-
-import { createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("user");
+import { mapState } from "vuex";
 export default {
   name: "Sidebar",
   components: { Item, DialogMenu },
@@ -56,11 +54,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      menuLeftList: (state) => {
-        return state.menuLeftList;
-      },
-    }),
+    ...mapState("user", ["menuLeftList"]),
   },
   methods: {
     toRouterPath(item) {
@@ -70,9 +64,13 @@ export default {
       if (path === "/") {
         PATH = "/";
       }
-      this.dialogShow = false;
+
       this.activeTitle = PATH;
-      if (nav) return;
+      if (nav) {
+        this.dialogShow = false;
+        return;
+      }
+
       this.$router.push({ path: PATH });
     },
     mouseOverChange(item) {
@@ -83,6 +81,9 @@ export default {
       } else {
         this.$emit("dialog-show-a");
       }
+    },
+    delMenuItem(code) {
+      this.$store.dispatch("user/updateMenuList", code);
     },
   },
 };

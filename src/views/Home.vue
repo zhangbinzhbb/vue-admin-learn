@@ -1,10 +1,24 @@
 <template lang="html">
   <div class="home">
+    <div>
+      <div :style="{ borderBottom: '1px solid #E9E9E9' }">
+        <a-checkbox
+          :indeterminate="indeterminate"
+          :checked="checkAll"
+          @change="onCheckAllChange"
+        >
+          Check all
+        </a-checkbox>
+      </div>
+      <br />
+      <a-checkbox-group
+        v-model="checkedList"
+        :options="plainOptions"
+        @change="onChange"
+      />
+    </div>
     <a-row type="flex" justify="start">
       <a-col :span="24">
-                <a-button type="danger">
-          Danger
-        </a-button>
         <a-button type="primary">
           primary
         </a-button>
@@ -30,15 +44,23 @@
         </a-col>
       </a-row>
     </div>
+    <div class="chart-container">
+      <chart id="myChart" height="100%" width="100%" />
+    </div>
     <a-table
       style="margin-top:10px;"
       :columns="columns"
       :data-source="data"
-      :scroll="{ x: 1500, y: 300 }">
+      :scroll="{ x: 1500, y: 300 }"
+    >
       <a slot="action" slot-scope="text">action</a>
     </a-table>
 
-    <a-list style="margin-top:10px;" :grid="{ gutter: 16, column: 4 }" :data-source="data1">
+    <a-list
+      style="margin-top:10px;"
+      :grid="{ gutter: 16, column: 4 }"
+      :data-source="data1"
+    >
       <a-list-item slot="renderItem" slot-scope="item, index">
         <a-card :title="item.title">
           Card content
@@ -49,6 +71,7 @@
 </template>
 
 <script>
+import Chart from "@/components/Charts/LineMarker/index";
 const columns = [
   {
     title: "Full Name",
@@ -99,17 +122,39 @@ const data1 = [
     title: "Title 4",
   },
 ];
+
+const plainOptions = ["Apple", "Pear", "Orange"];
+const defaultCheckedList = ["Apple", "Orange"];
 export default {
   name: "Home",
+  components: { Chart },
   data() {
     return {
       data,
       data1,
       columns,
+      checkedList: defaultCheckedList,
+      indeterminate: true,
+      checkAll: false,
+      plainOptions,
     };
   },
   created() {
     console.log("===Home===");
+  },
+  methods: {
+    onChange(checkedList) {
+      this.indeterminate =
+        !!checkedList.length && checkedList.length < plainOptions.length;
+      this.checkAll = checkedList.length === plainOptions.length;
+    },
+    onCheckAllChange(e) {
+      Object.assign(this, {
+        checkedList: e.target.checked ? plainOptions : [],
+        indeterminate: false,
+        checkAll: e.target.checked,
+      });
+    },
   },
 };
 </script>

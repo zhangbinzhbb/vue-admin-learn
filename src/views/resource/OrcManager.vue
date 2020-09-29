@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>OrcManager</div>
+	<div>资源编排</div>
 </template>
 
 <script>

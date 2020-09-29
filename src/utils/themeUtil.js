@@ -21,7 +21,6 @@ function getThemeColors(color, $theme) {
   const mode = $theme || theme.mode;
   const replaceColors = getThemeToggleColors(_color, mode);
 
-  console.log('replaceColors:', replaceColors);
   const themeColors = [
     ...replaceColors.mainColors,
     ...replaceColors.subColors,
@@ -53,10 +52,7 @@ function modifyVars(color) {
     error
   } = getFunctionalColors(theme.mode);
   //const primary = '#d90007';
-
   const primary = palettes[5];
-
-  console.log('primary--1:', primary)
   return {
     'primary-color': primary,
     'primary-1': palettes[0],

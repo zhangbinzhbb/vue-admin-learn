@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>OperationManager</div>
+	<div>监控告警</div>
 </template>
 
 <script>

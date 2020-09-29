@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>WorkFlow</div>
+	<div>流程管理</div>
 </template>
 
 <script>

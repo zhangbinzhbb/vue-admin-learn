@@ -21,7 +21,7 @@ VueRouter.prototype.push = function push(location) {
 
 // 入口文件
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes,
 });

@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>DataCenter</div>
+	<div>数据中心</div>
 </template>
 
 <script>

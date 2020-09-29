@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>TasklogManager</div>
+	<div>任务日志</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>BussinessSystem</div>
+	<div>业务系统</div>
 </template>
 
 <script>

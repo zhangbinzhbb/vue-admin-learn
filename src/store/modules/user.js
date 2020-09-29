@@ -1,14 +1,16 @@
 import * as user from "@/api/user";
 import * as menu from "@/api/menu";
-import * as types from "../action-types";
 import {
   setLocal,
 } from "@/utils/local";
 // removeToken
+
 import {
   getToken,
   setToken,
-} from "@/utils/auth";
+  removeToken
+} from '@/utils/auth'
+
 import router from "@/router/index";
 import per from "@/router/permission";
 
@@ -39,32 +41,30 @@ export default {
     menuLeftList: []
   },
   mutations: {
-    [types.SET_USER](state, payload) {
-      state.userInfo = payload;
-      if (payload && payload.token) {
-        setLocal("token", payload.token);
-      } else {
-        localStorage.clear("token");
-      }
+    SET_TOKEN: (state, token) => {
+      state.token = token
     },
-    [types.SET_PERMISSION](state, has) {
+    SET_USER: (state, payload) => {
+      state.userInfo = payload;
+    },
+    SET_PERMISSION: (state, has) => {
       state.hasPermission = has;
     },
-    [types.SET_MENU_PERMISSION](state, has) {
+    SET_MENU_PERMISSION: (state, has) => {
       state.menuPermission = has;
     },
-    [types.UPDATE_MENU_LIST](state, data) {
+    UPDATE_MENU_LIST: (state, data) => {
       state.menuList = data;
     },
-    [types.SET_MENU_LIST](state, data) {
+    SET_MENU_LIST: (state, data) => {
       state.menuLeftList = data;
     }
   },
   actions: {
-    async [types.SET_MENU_LIST]({
+    // 设置菜单列表
+    async setMenuList({
       commit
     }, data) {
-      console.log('data==:', data);
       // 后端返回的用户的权限
       let authList = data;
 
@@ -99,69 +99,72 @@ export default {
           LIST = [...arr, ...newMenu];
         }
       });
-      commit(types.SET_MENU_LIST, LIST);
+      commit('SET_MENU_LIST', LIST);
     },
-    async [types.UPDATE_MENU_LIST]({
+    // 更新菜单权限列表
+    async updateMenuList({
       commit,
       dispatch
     }, code) {
       const result = await menu.updateMenu({
         code
       });
-      commit(types.UPDATE_MENU_LIST, result.data);
-      dispatch(types.SET_MENU_LIST, result.data);
+      commit('UPDATE_MENU_LIST', result.data);
+      dispatch('setMenuList', result.data);
     },
-    async [types.MENU_LIST]({
+    // 获取菜单权限列表
+    async menuList({
       commit
     }) {
       const result = await menu.getMenu();
-      commit(types.UPDATE_MENU_LIST, result.data);
+      commit('UPDATE_MENU_LIST', result.data);
       return result.data;
     },
-    // dispatch
-    async [types.SET_USER]({
+    // 设置用户信息
+    async setUser({
       commit,
     }, {
       payload,
       hasPermission,
     }, ) {
-      commit(types.SET_USER, payload, );
-      commit(types.SET_PERMISSION, hasPermission, );
+      commit('SET_USER', payload);
+      commit('SET_PERMISSION', hasPermission);
       //设置token
       const token = "token";
       setToken(token);
     },
     // 登录
-    async [types.USER_LOGIN]({
+    async userLogin({
       dispatch,
     }, userInfo) {
       let result = await user.login(userInfo);
-      dispatch(types.SET_USER, {
+      dispatch('setUser', {
         payload: result.data,
         hasPermission: true,
       });
       return result;
     },
     // 验证是否登录
-    async [types.USER_VALIDATE]({
+    async userValidate({
       dispatch,
     }, ) {
       if (!getToken()) return false;
       try {
         let result = await user.validate();
-        dispatch(types.SET_USER, {
+        dispatch('setUser', {
           payload: result.data,
           hasPermission: true,
         }, );
         return true;
       } catch (e) {
-        dispatch(types.SET_USER, {
+        dispatch('setUser', {
           payload: {},
           hasPermission: false,
         });
       }
     },
-    async [types.ADD_ROUTE]({
+    // 添加路由动作
+    async addRoute({
       commit,
       state,
     }, ) {
@@ -175,8 +178,34 @@ export default {
         );
         route.children = routes;
         router.addRoutes([route]);
-        commit(types.SET_MENU_PERMISSION, true, );
+        commit('SET_MENU_PERMISSION', true, );
       }
+    },
+    // 用户退出
+    logout({
+      commit,
+      state,
+      dispatch
+    }) {
+      return new Promise((resolve, reject) => {
+        logout(state.token).then(() => {
+          commit('SET_TOKEN', '')
+          removeToken()
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    // remove token
+    resetToken({
+      commit
+    }) {
+      return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        resolve()
+      })
     },
   },
 };

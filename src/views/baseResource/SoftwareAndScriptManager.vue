@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>SoftwareAndScriptManager</div>
+	<div>软件及脚本</div>
 </template>
 
 <script>

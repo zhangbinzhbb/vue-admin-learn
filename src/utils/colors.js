@@ -1,6 +1,5 @@
 const varyColor = require('webpack-theme-color-replacer/client/varyColor');
 
-//
 const {
   generate
 } = require('@ant-design/colors');
@@ -10,25 +9,13 @@ const {
 } = require('../config/default');
 
 const Config = require('../config');
-
 const themeMode = ADMIN.theme.mode;
 
-console.log('themeMode:', themeMode);
-console.log('generate:', generate);
 // 获取 ant design 色系
 function getAntdColors(color, mode) {
   let options = mode && (mode === themeMode.NIGHT) ? {
     theme: 'dark'
   } : undefined;
-  const resultColor = generate(color, options)
-  console.log('resultColor:', resultColor)
-
-  // const c = ['#ffeae6', '#ffafa3',
-  //   '#ff887a', '#ff5d52',
-  //   '#ff3029', '#ff0000',
-  //   '#d90007', '#b3000c',
-  //   '#8c000e', '#66000e'
-  // ]
   return generate(color, options);
 }
 
@@ -77,8 +64,6 @@ function getFunctionalColors(mode) {
 function getThemeToggleColors(color, mode) {
   //主色系
   const mainColors = getAntdColors(color, mode);
-  console.log('mainColors:', mainColors);
-
   const primary = mainColors[5];
   //辅助色系，因为 antd 目前没针对夜间模式设计，所以增加辅助色系以保证夜间模式的正常切换
   const subColors = getAntdColors(primary, themeMode.LIGHT);

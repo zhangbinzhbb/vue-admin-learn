@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>CapabilityManager</div>
+	<div>容量监控</div>
 </template>
 
 <script>

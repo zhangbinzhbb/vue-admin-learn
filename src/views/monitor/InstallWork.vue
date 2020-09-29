@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>InstallWork</div>
+	<div>安装作业</div>
 </template>
 
 <script>

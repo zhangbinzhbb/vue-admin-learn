@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>VpcMain</div>
+	<div>VPC管理</div>
 </template>
 
 <script>

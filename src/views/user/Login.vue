@@ -5,20 +5,16 @@
 </template>
 
 <script>
-import * as types from "@/store/action-types";
-import { createNamespacedHelpers } from "vuex";
-let { mapActions } = createNamespacedHelpers("user");
-
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   methods: {
-    ...mapActions([types.USER_LOGIN]),
+    ...mapActions("user", ["userLogin"]),
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           try {
-            //  let { data } =
-            await this[types.USER_LOGIN]({
+            await this.userLogin({
               ...this.ruleForm,
               uid: this.uid,
             });

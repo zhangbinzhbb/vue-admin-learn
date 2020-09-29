@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>ServiceDirectory</div>
+	<div>服务目录</div>
 </template>
 
 <script>

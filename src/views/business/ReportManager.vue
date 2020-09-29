@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>ReportManager</div>
+	<div>报表管理</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>Resourceaccess</div>
+	<div>基础设施</div>
 </template>
 
 <script>

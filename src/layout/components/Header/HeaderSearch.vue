@@ -1,7 +1,7 @@
 <template>
-  <div class="header-search">
-    <a-icon v-if="!searchMode"
-            type="search"
+  <div class="header-search"
+       :class="searchMode?'header-search-active':''">
+    <a-icon type="search"
             class="search-icon"
             @click="enterSearchMode" />
     <a-auto-complete ref="input"
@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       dataSource: ["选项一", "选项二"],
-      searchMode: false,
+      searchMode: true,
     };
   },
   methods: {
@@ -36,10 +36,23 @@ export default {
 </script>
 
 <style lang="less">
+.header-search-active {
+  .search-icon {
+    opacity: 0 !important;
+  }
+}
 .header-search {
   .search-icon {
     font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
     cursor: pointer;
+  }
+  .ant-select {
+    color: #fff;
+  }
+  .ant-select-selection {
+    background: rgba(255, 255, 255, 0.08);
   }
   .search-input {
     border: 0;

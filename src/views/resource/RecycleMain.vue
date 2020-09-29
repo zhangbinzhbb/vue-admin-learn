@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>RecycleMain</div>
+	<div>回收站</div>
 </template>
 
 <script>

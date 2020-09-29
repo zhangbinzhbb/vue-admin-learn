@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>Order</div>
+	<div>订单审批</div>
 </template>
 
 <script>

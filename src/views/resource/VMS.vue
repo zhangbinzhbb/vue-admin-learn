@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>VMS</div>
+	<div>资源实例</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>Availpartitions</div>
+	<div>可用分区</div>
 </template>
 
 <script>

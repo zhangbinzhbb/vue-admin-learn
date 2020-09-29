@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>VDC</div>
+	<div>VDC管理</div>
 </template>
 
 <script>

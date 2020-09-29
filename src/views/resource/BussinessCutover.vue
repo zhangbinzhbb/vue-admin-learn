@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>BussinessCutover</div>
+	<div>业务割接</div>
 </template>
 
 <script>

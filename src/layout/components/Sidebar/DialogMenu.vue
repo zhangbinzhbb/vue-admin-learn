@@ -48,10 +48,7 @@
 import componentsRouter from "@/router/components.router.js";
 import Item from "./Item";
 
-import * as types from "@/store/action-types";
-import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("user");
-
+import { mapState } from "vuex";
 export default {
   name: "DialogMenu",
   components: { Item },
@@ -61,11 +58,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      menuList: (state) => {
-        return state.menuList;
-      },
-    }),
+    ...mapState("user", ["menuList"]),
     menuListStr() {
       const data = this.menuList;
       let str = "";
@@ -79,9 +72,8 @@ export default {
     this.subMenu = componentsRouter;
   },
   methods: {
-    ...mapActions([types.UPDATE_MENU_LIST]),
     toLighten(code) {
-      this[types.UPDATE_MENU_LIST](code);
+      this.$store.dispatch("user/updateMenuList", code);
     },
   },
 };

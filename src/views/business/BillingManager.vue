@@ -1,5 +1,5 @@
 <template lang="html">
-	<div>BillingManager</div>
+	<div>计费管理</div>
 </template>
 
 <script>
